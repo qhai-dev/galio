@@ -1,19 +1,29 @@
 package main
 
 import (
+	"context"
+	"fmt"
+
 	"github.com/qhai-dev/galio/library/galio"
 )
 
 func main() {
 	app := galio.NewApplication()
-	defer app.Close()
 
-	gs, err := inject(app)
-	if err != nil {
-		panic(err)
-	}
+	app.StartHook(func(ctx context.Context) error {
+		err := initializer(app)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
 
-	if err := app.Run(gs); err != nil {
+	app.StartHook(func(ctx context.Context) error {
+		fmt.Printf("stathook 2 \n")
+		return nil
+	})
+
+	if err := app.Run(); err != nil {
 		panic(err)
 	}
 }

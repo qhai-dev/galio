@@ -8,14 +8,14 @@ package main
 
 import (
 	"github.com/qhai-dev/galio/library/galio"
-	"github.com/qhai-dev/galio/rpc/account/rpc"
-	"github.com/qhai-dev/galio/rpc/account/rpc/handler"
+	"github.com/qhai-dev/galio/rpc/account/server"
+	"github.com/qhai-dev/galio/rpc/account/server/handler"
 )
 
 // Injectors from wire.go:
 
-func inject(application *galio.Application) (galio.Server, error) {
-	rpcHandler := handler.NewHandler(application)
-	server := rpc.New(rpcHandler)
-	return server, nil
+func initializer(application *galio.Application) error {
+	accountService := handler.NewAccountService(application)
+	error2 := server.NewRPCServer(accountService)
+	return error2
 }

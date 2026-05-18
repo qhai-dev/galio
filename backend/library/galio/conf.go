@@ -10,13 +10,13 @@ import (
 	etcd "go.etcd.io/etcd/client/v3"
 )
 
-type Option func(*options)
+// type Option func(*options)
 
-type options struct {
-	ctx context.Context
+// type options struct {
+// 	ctx context.Context
 
-	prefix string
-}
+// 	prefix string
+// }
 
 func NewConfLoad() {
 	ctx := context.Background()

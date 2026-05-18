@@ -10,10 +10,10 @@ import (
 	"github.com/qhai-dev/galio/rpc/account/server"
 )
 
-func inject(*galio.Application) (galio.Server, error) {
+func initializer(*galio.Application) error {
 	wire.Build(
 		server.ProviderSet,
 	)
 
-	return nil, nil
+	return nil
 }
